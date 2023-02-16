@@ -1,0 +1,22 @@
+{
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "es2021": true
+    },
+    "extends": ["airbnb-base", "prettier"],
+    "overrides": [],
+    "parser": "babel-eslint",
+    "parserOptions": {
+        "ecmaVersion": "latest",
+        "ecmaFeatures": {
+            "experimentalObjectRestSpread": true
+        }
+    },
+    "rules": {
+        "no-console": "off",
+        "no-unused-vars": "off",
+        "prefer-destructuring": "off",
+        "no-undef": "off"
+    }
+}
