@@ -14,7 +14,8 @@ export const dataFetcher = (() => {
             const currentResponseData = await currentResponse.json();
             console.log(currentResponseData.main.temp);
             console.log(currentResponseData.name);
-            name = await currentResponseData.name;
+            name = currentResponseData.name;
+            console.log(name);
             temp = currentResponseData.main.temp;
             const lon = currentResponseData.coord.lon;
             const lat = currentResponseData.coord.lat;
@@ -27,11 +28,13 @@ export const dataFetcher = (() => {
         } catch (error) {
             console.log("Error:", error);
         }
+        return {
+            name,
+            temp,
+        };
     };
 
     return {
         fetchCurrentWeather,
-        name,
-        temp,
     };
 })();
