@@ -1,6 +1,15 @@
 export const dataFetcher = (() => {
     let name;
     let temp;
+    let tempMin;
+    let tempMax;
+    let description;
+    let feelsLike;
+    let humidity;
+    let chanceOfRain;
+    let windSpeed;
+    let pressure;
+    let visibility;
 
     const fetchCurrentWeather = async (location) => {
         if (!location) {
@@ -13,8 +22,16 @@ export const dataFetcher = (() => {
             );
             const currentResponseData = await currentResponse.json();
             name = currentResponseData.name;
+            description = currentResponseData.weather[0].description;
+            visibility = currentResponseData.visibility;
             temp = currentResponseData.main.temp;
-            // console.log(name);
+            tempMin = currentResponseData.main.temp_min;
+            tempMax = currentResponseData.main.temp_max;
+            feelsLike = currentResponseData.main.feels_like;
+            humidity = currentResponseData.main.humidity;
+            pressure = currentResponseData.main.pressure;
+            windSpeed = currentResponseData.wind.speed;
+            // console.log(feelsLike);
             // console.log(temp);
             const lon = currentResponseData.coord.lon;
             const lat = currentResponseData.coord.lat;
@@ -30,6 +47,14 @@ export const dataFetcher = (() => {
         return {
             name,
             temp,
+            tempMin,
+            tempMax,
+            description,
+            feelsLike,
+            humidity,
+            pressure,
+            windSpeed,
+            visibility,
         };
     };
 
