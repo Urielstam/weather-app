@@ -19,17 +19,24 @@ export const displayCityDetails = (() => {
         let city = searchInput.value;
         let details = dataFetcher.fetchCurrentWeather(city);
         details.then((result) => {
-            nameOfCityParam.textContent = result.name;
-            tempParam.textContent = Math.round(result.temp) + "°";
-            descParam.textContent = result.description;
-            minMaxTempParam.textContent = `H:${Math.round(
-                result.tempMax
-            )}° L:${Math.round(result.tempMin)}°`;
-            feelsLikeParam.textContent = Math.round(result.feelsLike) + "°";
-            humidityParam.textContent = result.humidity + "%";
-            windSpeedParam.textContent = Math.round(result.windSpeed) + "km/h";
-            pressureParam.textContent = result.pressure + " hPa";
-            visibilityParam.textContent = result.visibility / 1000 + "km";
+            if (result.temp) {
+                console.log(result);
+                nameOfCityParam.textContent = result.name;
+                tempParam.textContent = Math.round(result.temp) + "°";
+                descParam.textContent = result.description;
+                minMaxTempParam.textContent = `H:${Math.round(
+                    result.tempMax
+                )}° L:${Math.round(result.tempMin)}°`;
+                feelsLikeParam.textContent = Math.round(result.feelsLike) + "°";
+                humidityParam.textContent = result.humidity + "%";
+                windSpeedParam.textContent =
+                    Math.round(result.windSpeed) + "km/h";
+                pressureParam.textContent = result.pressure + " hPa";
+                visibilityParam.textContent = result.visibility / 1000 + "km";
+            }
+        });
+        details.catch((error) => {
+            console.log(error);
         });
     });
 })();
