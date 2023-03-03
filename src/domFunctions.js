@@ -1,4 +1,5 @@
 import { dataFetcher } from "./apiFunctions";
+import { utils } from "./utils";
 
 const searchForm = document.querySelector(".search-form");
 const searchInput = document.querySelector("#search-city");
@@ -12,6 +13,7 @@ const windSpeedParam = document.getElementById("detail-wind-speed-param");
 const pressureParam = document.getElementById("detail-pressure-param");
 const visibilityParam = document.getElementById("detail-visibility-param");
 const nameOfCityParam = document.querySelector(".city-text");
+const timeOfCityParam = document.querySelector(".time-text");
 
 export const displayCityDetails = (() => {
     searchForm.addEventListener("submit", (e) => {
@@ -22,6 +24,7 @@ export const displayCityDetails = (() => {
             if (result.temp) {
                 console.log(result);
                 nameOfCityParam.textContent = result.name;
+                timeOfCityParam.textContent = utils.formatDate(result.date);
                 tempParam.textContent = Math.round(result.temp) + "°";
                 descParam.textContent = result.description;
                 minMaxTempParam.textContent = `H:${Math.round(

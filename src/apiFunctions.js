@@ -1,5 +1,6 @@
 export const dataFetcher = (() => {
     let name;
+    let date;
     let temp;
     let tempMin;
     let tempMax;
@@ -22,6 +23,7 @@ export const dataFetcher = (() => {
             );
             const currentResponseData = await currentResponse.json();
             name = currentResponseData.name;
+            date = currentResponseData.dt;
             description = currentResponseData.weather[0].description;
             visibility = currentResponseData.visibility;
             temp = currentResponseData.main.temp;
@@ -46,6 +48,7 @@ export const dataFetcher = (() => {
         }
         return {
             name,
+            date,
             temp,
             tempMin,
             tempMax,
