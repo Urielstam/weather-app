@@ -1,4 +1,6 @@
 export const dataFetcher = (() => {
+    let lat;
+    let lon;
     let name;
     let date;
     let temp;
@@ -7,7 +9,6 @@ export const dataFetcher = (() => {
     let description;
     let feelsLike;
     let humidity;
-    let chanceOfRain;
     let windSpeed;
     let pressure;
     let visibility;
@@ -33,20 +34,14 @@ export const dataFetcher = (() => {
             humidity = currentResponseData.main.humidity;
             pressure = currentResponseData.main.pressure;
             windSpeed = currentResponseData.wind.speed;
-            // console.log(feelsLike);
-            // console.log(temp);
-            const lon = currentResponseData.coord.lon;
-            const lat = currentResponseData.coord.lat;
-
-            const forecastResponse = await fetch(
-                `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=811d9c0815e66ee496dfa5a20d26075f`
-            );
-            const forecastResponseData = await forecastResponse.json();
-            // console.log(forecastResponseData);
+            lon = currentResponseData.coord.lon;
+            lat = currentResponseData.coord.lat;
         } catch (error) {
             console.log("Error:", error);
         }
         return {
+            lat,
+            lon,
             name,
             date,
             temp,
@@ -61,7 +56,21 @@ export const dataFetcher = (() => {
         };
     };
 
+    const fetchCityForecast = async (lat, lon) => {
+        let forecast;
+        try {
+            const forecastResponse = await fetch(
+                `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=811d9c0815e66ee496dfa5a20d26075f&units=metric`
+            );
+            const forecastResponseData = await forecastResponse.json();
+            return forecastResponseData;
+        } catch (error) {
+            console.log("Error:", error);
+        }
+    };
+
     return {
         fetchCurrentWeather,
+        fetchCityForecast,
     };
 })();

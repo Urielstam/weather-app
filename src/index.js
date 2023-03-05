@@ -1,5 +1,4 @@
 import "./style.css";
-import { displayCityDetails } from "./domFunctions";
+import { domFunctions } from "./domFunctions";
+import { dataFetcher } from "./apiFunctions";
 import { utils } from "./utils";
-
-utils.formatDate(1677848325);
